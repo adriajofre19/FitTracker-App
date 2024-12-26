@@ -17,10 +17,22 @@ model Routine {
   id        Int       @id @default(autoincrement())
   name      String
   exercises Exercise[] // Relación implícita muchos-a-muchos
+  users     User[]     // Relación implícita muchos-a-muchos
 }
 
 model Exercise {
   id       Int       @id @default(autoincrement())
   name     String
   routines Routine[] // Relación implícita muchos-a-muchos
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  name     String
+  age      Int
+  height   Float
+  weight   Float
+  routines Routine[]
 }

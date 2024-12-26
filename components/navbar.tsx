@@ -42,6 +42,9 @@ export default function Navbar() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent sideOffset={5} alignOffset={5}>
                                 <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <Link href="/profile">Profile</Link>
+                                    </DropdownMenuItem>
                                     <DropdownMenuItem onSelect={() => signOut()}>Sign out</DropdownMenuItem>
                                 </DropdownMenuGroup>
                             </DropdownMenuContent>
