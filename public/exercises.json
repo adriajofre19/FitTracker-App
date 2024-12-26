@@ -1,0 +1,64 @@
+{
+    "exercises": [
+        {
+            "name": "Bench Press",
+            "muscle_group": "Chest",
+            "equipment": "Barbell",
+            "difficulty": "Intermediate"
+        },
+        {
+            "name": "Squat",
+            "muscle_group": "Legs",
+            "equipment": "Barbell",
+            "difficulty": "Intermediate"
+        },
+        {
+            "name": "Deadlift",
+            "muscle_group": "Back",
+            "equipment": "Barbell",
+            "difficulty": "Advanced"
+        },
+        {
+            "name": "Pull-Up",
+            "muscle_group": "Back",
+            "equipment": "Bodyweight",
+            "difficulty": "Intermediate"
+        },
+        {
+            "name": "Bicep Curl",
+            "muscle_group": "Arms",
+            "equipment": "Dumbbell",
+            "difficulty": "Beginner"
+        },
+        {
+            "name": "Tricep Dip",
+            "muscle_group": "Arms",
+            "equipment": "Bodyweight",
+            "difficulty": "Intermediate"
+        },
+        {
+            "name": "Shoulder Press",
+            "muscle_group": "Shoulders",
+            "equipment": "Dumbbell",
+            "difficulty": "Intermediate"
+        },
+        {
+            "name": "Leg Press",
+            "muscle_group": "Legs",
+            "equipment": "Machine",
+            "difficulty": "Beginner"
+        },
+        {
+            "name": "Lat Pulldown",
+            "muscle_group": "Back",
+            "equipment": "Machine",
+            "difficulty": "Beginner"
+        },
+        {
+            "name": "Plank",
+            "muscle_group": "Core",
+            "equipment": "Bodyweight",
+            "difficulty": "Beginner"
+        }
+    ]
+}
