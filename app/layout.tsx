@@ -1,12 +1,16 @@
-'use client';
-import './globals.css';
-import { SessionProvider, useSession } from 'next-auth/react';
-import { Inter } from 'next/font/google';
-import Navbar from '@/components/navbar';
-import Login from '@/components/login';
-import { Skeleton } from '@/components/ui/skeleton';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Navbar } from "@/components/layout/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { getSession } from "next-auth/react";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "FitTrack",
+  description: "Track your fitness journey",
+};
 
 export default function RootLayout({
   children,
@@ -16,27 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
-          <AuthWrapper>
-            <Navbar />
-            {children}
-          </AuthWrapper>
-        </SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
-}
-
-function AuthWrapper({ children }: { children: React.ReactNode }) {
-  const { data: session, status } = useSession();
-
-  if (status === 'loading') {
-    return <Skeleton />;
-  }
-
-  if (!session) {
-    return <Login />;
-  }
-
-  return <>{children}</>;
 }

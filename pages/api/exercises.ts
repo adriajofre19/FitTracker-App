@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const exercises = await prisma.exercises.findMany();
+        const exercises = await prisma.exercise.findMany();
         res.status(200).json(exercises);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch exercises' });
