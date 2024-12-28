@@ -10,8 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { email,name, age, weight, height } = req.body;
 
-    
-
     try {
         const updatedUser = await prisma.user.update({
             where: { email },

@@ -1,9 +1,9 @@
 "use client";
 
-import { Calendar, Dumbbell, List, LineChart } from "lucide-react";
+import { Calendar, Dumbbell, List, LineChart, PlusIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type TabType = "calendar" | "notifications" | "exercises" | "progress";
+type TabType = "calendar" | "routines" | "addroutines" | "exercises" | "progress";
 
 interface WorkoutsNavProps {
   activeTab: TabType;
@@ -18,9 +18,14 @@ export function WorkoutsNav({ activeTab, setActiveTab }: WorkoutsNavProps) {
       icon: Calendar,
     },
     {
-      id: "notifications" as TabType,
-      label: "Notifications",
+      id: "routines" as TabType,
+      label: "Routines",
       icon: List,
+    },
+    {
+      id: "addroutines" as TabType,
+      label: "Create routine",
+      icon: PlusIcon,
     },
     {
       id: "exercises" as TabType,

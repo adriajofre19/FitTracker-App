@@ -34,6 +34,7 @@ model UserRoutine {
   userId    String    @map("user_id")
   routineId String    @map("routine_id")
   date      DateTime?
+  completed Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
   routine   Routine   @relation(fields: [routineId], references: [id])
   createdAt DateTime  @default(now()) @map("created_at")
@@ -45,7 +46,6 @@ model Routine {
   id          String    @id @default(uuid())
   name        String
   description String?
-  completed   Boolean   @default(false)
   userId      String    @map("user_id")
   UserRoutine UserRoutine[]
   exercises   Exercise[]
@@ -56,8 +56,7 @@ model Routine {
 
 model Exercise {
   id          String    @id @default(uuid())
-  name        String
-  description String?
+  exerciseId  String
   routineId   String    @map("routine_id")
   routine     Routine   @relation(fields: [routineId], references: [id])
   createdAt   DateTime  @default(now()) @map("created_at")
