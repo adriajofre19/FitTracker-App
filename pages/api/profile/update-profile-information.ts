@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
 
 const prisma = new PrismaClient();
 
@@ -9,16 +8,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    const { email, name } = req.body;
+    const { email,name, age, weight, height } = req.body;
 
-    if (!email || !name ) {
-        return res.status(400).json({ message: 'Missing required fields' });
-    }
+    
 
     try {
         const updatedUser = await prisma.user.update({
             where: { email },
-            data: { name },
+            data: { name, age, weight, height },
         });
 
         return res.status(200).json(updatedUser);

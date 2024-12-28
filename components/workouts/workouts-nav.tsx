@@ -1,32 +1,37 @@
 "use client";
 
-import { User, Bell, Shield, Ruler } from "lucide-react";
+import { Calendar, Dumbbell, List, LineChart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type TabType = "profile" | "security" | "notification";
+type TabType = "calendar" | "notifications" | "exercises" | "progress";
 
-interface UserNavProps {
+interface WorkoutsNavProps {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
 }
 
-export function UserNav({ activeTab, setActiveTab }: UserNavProps) {
+export function WorkoutsNav({ activeTab, setActiveTab }: WorkoutsNavProps) {
   const navItems = [
     {
-      id: "profile" as TabType,
-      label: "Profile Information",
-      icon: User,
+      id: "calendar" as TabType,
+      label: "Calendar",
+      icon: Calendar,
     },
     {
-      id: "security" as TabType,
-      label: "Security",
-      icon: Shield,
-    },
-    {
-      id: "notification" as TabType,
+      id: "notifications" as TabType,
       label: "Notifications",
-      icon: Bell,
-    }
+      icon: List,
+    },
+    {
+      id: "exercises" as TabType,
+      label: "Exercises",
+      icon: Dumbbell,
+    },
+    {
+      id: "progress" as TabType,
+      label: "Progress",
+      icon: LineChart,
+    },
   ];
 
   return (

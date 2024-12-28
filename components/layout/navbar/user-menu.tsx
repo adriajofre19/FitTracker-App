@@ -36,7 +36,6 @@ export function UserMenu() {
   useEffect(() => {
       getAuthUser().then((data) => {
         setUser(data);
-        console.log(data);
       });
     }, []);
 
@@ -48,6 +47,7 @@ export function UserMenu() {
           <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
+      {user && (
       <DropdownMenuContent align="end" className="w-56">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1">
@@ -55,25 +55,36 @@ export function UserMenu() {
             <p className="text-xs text-muted-foreground">{user?.email}</p>
           </div>
         </div>
+        
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href={`/profile`} className="flex">
+        <Link href="/profile" className="flex">
+        <DropdownMenuItem className="w-full">
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
-          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </DropdownMenuItem>
+        </Link>
+        
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <button onClick={() => signOut()} className="flex">
-            <LogOut className="mr-2 h-4 w-4 text-red-600" />
-            <span className="text-red-600">Log out</span>
+        <button onClick={() => signOut()} className="flex w-full">
+          <DropdownMenuItem className="w-full">
+            
+              <LogOut className="mr-2 h-4 w-4 text-red-600" />
+              <span className="text-red-600">Log out</span>
+            
+          </DropdownMenuItem>
           </button>
-        </DropdownMenuItem>
       </DropdownMenuContent>
+      )}
+      {!user && (
+        <DropdownMenuContent align="end" className="w-56">
+          <Link href="/login" className="flex">
+            <DropdownMenuItem className="w-full">
+                <User className="mr-2 h-4 w-4" />
+                <span>Login</span>
+            </DropdownMenuItem>
+          </Link>
+        </DropdownMenuContent>
+      )}
     </DropdownMenu>
   );
 }

@@ -5,12 +5,27 @@ import { getSession } from "next-auth/react";
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    
+    
     try {
+        const { date } = req.body;
+
         const session = await getSession({ req });
         const user = await prisma.user.findUnique({
             where: { email: session?.user?.email ?? undefined },
         });
-        res.status(200).json(user);
+
+        const routines = await prisma.routine.findMany({
+            where: {
+                userId: user?.id,
+                date: date
+            },
+            include: {
+                exercises: true
+            }
+        });
+        
+        res.status(200).json(routines);
     } catch (error) {
         res.status(500).json(null);
     } finally {

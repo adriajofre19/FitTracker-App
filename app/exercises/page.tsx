@@ -17,7 +17,6 @@ export default function Home() {
     
     useEffect(() => {
         getExercises().then((data) => {
-            console.log(data);
         });
         getExercicesFromJson().then((data) => {
             setExercises(data.exercises);

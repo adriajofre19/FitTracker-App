@@ -4,9 +4,9 @@ import { useState } from "react";
 import { UserNav } from "./user-nav";
 import { ProfileForm } from "./profile-form";
 import { SecurityForm } from "./security-form";
-import { MeasurementsForm } from "./measurements-form";
+import { NotificationForm } from "./notification-form";
 
-type TabType = "profile" | "security" | "measurements";
+type TabType = "profile" | "security" | "notification";
 
 export function UserProfile() {
   const [activeTab, setActiveTab] = useState<TabType>("profile");
@@ -18,7 +18,7 @@ export function UserProfile() {
         <div className="flex-1 max-w-3xl">
           {activeTab === "profile" && <ProfileForm />}
           {activeTab === "security" && <SecurityForm />}
-          {activeTab === "measurements" && <MeasurementsForm />}
+          {activeTab === "notification" && <NotificationForm />}
         </div>
       </div>
     </div>
