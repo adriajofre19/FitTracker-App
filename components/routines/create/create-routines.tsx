@@ -62,7 +62,7 @@ export function CreateRoutinePage() {
     }
 
     console.log("Submitting routine:", routineData)
-    router.push('/routines')
+    
   }
 
   const getAuthUser = async () => {
@@ -122,6 +122,7 @@ export function CreateRoutinePage() {
             await createRoutine(formData)
           } finally {
             setIsSubmitting(false)
+            
           }
         }} className="space-y-8">
         <div className="grid gap-4">

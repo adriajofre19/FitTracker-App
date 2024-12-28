@@ -99,9 +99,7 @@ export function AddExercisesDialog({
                     searchExercises(e.target.value)
                   }}
                 />
-                <Button variant="secondary" disabled={isSearching}>
-                  <Search className="h-4 w-4" />
-                </Button>
+                
               </div>
             )}
           </div>

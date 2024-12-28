@@ -18,7 +18,7 @@ interface WorkoutListProps {
 export function WorkoutList({ routines }: WorkoutListProps) {
   const router = useRouter();
 
-  if (!routines.length) {
+  if (!routines?.length) {
     return (
       <div className="text-center py-8 text-muted-foreground">
         No routines scheduled for this day
@@ -44,7 +44,7 @@ export function WorkoutList({ routines }: WorkoutListProps) {
             {routine.description}
           </p>
           <div className="text-sm text-muted-foreground">
-            {routine.exercises.length} exercises
+            {routine.exercises?.length || 0} exercises
           </div>
         </div>
       ))}

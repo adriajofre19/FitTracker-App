@@ -9,8 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    console.log(req.body);
-
     const { name, description, exercises, email } = req.body;
 
     const user = await prisma.user.findUnique({
