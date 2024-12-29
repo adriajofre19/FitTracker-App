@@ -28,13 +28,13 @@ interface Exercise {
 }
 
 interface User {
-    name: string | null
-    email: string
-    age: number | null
-    weight: number | null
-    height: number | null
-    avatar: string | null
-  }
+  name: string | null
+  email: string
+  age: number | null
+  weight: number | null
+  height: number | null
+  avatar: string | null
+}
 
 export function CreateRoutinePage() {
   const router = useRouter()
@@ -53,7 +53,7 @@ export function CreateRoutinePage() {
     e.preventDefault()
     const form = e.target as HTMLFormElement
     const formData = new FormData(form)
-    
+
     const routineData = {
       name: formData.get("name"),
       description: formData.get("description"),
@@ -62,7 +62,7 @@ export function CreateRoutinePage() {
     }
 
     console.log("Submitting routine:", routineData)
-    
+
   }
 
   const getAuthUser = async () => {
@@ -81,7 +81,7 @@ export function CreateRoutinePage() {
         description: formData.get("description"),
         exercises: exercises.map(ex => ex.id),
         email: user?.email,
-        
+
       }
 
       const response = await fetch(`/api/workouts/create/create-routine`, {
@@ -97,13 +97,13 @@ export function CreateRoutinePage() {
     }
   }
 
-     useEffect(() => {
-        getAuthUser().then((data) => {
-            setUser(data)
-            console.log(data)
-        })
-      }, [])
-        
+  useEffect(() => {
+    getAuthUser().then((data) => {
+      setUser(data)
+      console.log(data)
+    })
+  }, [])
+
 
   return (
     <div className="container max-w-3xl py-8 space-y-8">
@@ -115,16 +115,16 @@ export function CreateRoutinePage() {
       </div>
 
       <form onSubmit={async (e) => {
-          e.preventDefault()
-          setIsSubmitting(true)
-          try {
-            const formData = new FormData(e.currentTarget)
-            await createRoutine(formData)
-          } finally {
-            setIsSubmitting(false)
-            
-          }
-        }} className="space-y-8">
+        e.preventDefault()
+        setIsSubmitting(true)
+        try {
+          const formData = new FormData(e.currentTarget)
+          await createRoutine(formData)
+        } finally {
+          setIsSubmitting(false)
+
+        }
+      }} className="space-y-8">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="name">Routine Name</Label>
@@ -189,9 +189,9 @@ export function CreateRoutinePage() {
         </div>
 
         <div className="flex gap-4 justify-end">
-          <Button 
-            type="button" 
-            variant="outline" 
+          <Button
+            type="button"
+            variant="outline"
             onClick={() => router.push('/routines')}
           >
             Cancel

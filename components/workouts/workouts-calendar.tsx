@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { DailyGoals } from "./daily-goals";
 import { AddRoutineDialog } from "./add-routine-dialog";
 import { Plus } from "lucide-react";
+import { get } from "node:http";
 
 
 
@@ -17,7 +18,7 @@ export function WorkoutsCalendar() {
   const [routines, setRoutines] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isAddRoutineOpen, setIsAddRoutineOpen] = useState(false);
-  
+
   const getRoutines = async (date: Date) => {
     const response = await fetch("/api/workouts/getallworkouts", {
       method: "GET",
@@ -28,6 +29,7 @@ export function WorkoutsCalendar() {
 
   useEffect(() => {
     setLoading(true);
+    console.log(date);
     getRoutines(date).then((data) => {
       const filteredRoutines = data.filter((routine: any) => {
         const routineDate = new Date(routine.date);
@@ -42,10 +44,22 @@ export function WorkoutsCalendar() {
     });
   }, [date]);
 
-  const handleAddRoutine = (newRoutine: any) => {
-    setRoutines((prev: any) => [...prev, newRoutine]);
-  };
-  
+  const handleAddRoutine = (routine: any) => {
+    console.log(routine.date);
+    getRoutines(routine.date).then((data) => {
+      const filteredRoutines = data.filter((routine: any) => {
+        const routineDate = new Date(routine.date);
+        return (
+          routineDate.getDate() === date.getDate() &&
+          routineDate.getMonth() === date.getMonth() &&
+          routineDate.getFullYear() === date.getFullYear()
+        );
+      });
+      setRoutines(filteredRoutines);
+    }
+    );
+  }
+
   // Mock goals data - replace with actual API call
   const goals = [
     { id: "1", description: "Complete morning workout", completed: false },
@@ -53,7 +67,7 @@ export function WorkoutsCalendar() {
     { id: "3", description: "30 minutes cardio", completed: false },
   ];
 
-  
+
 
   return (
     <div className="space-y-6">
@@ -95,7 +109,7 @@ export function WorkoutsCalendar() {
                 ))}
               </div>
             ) : (
-              <WorkoutList routines={routines} />
+              <WorkoutList routines={routines} date={date} />
             )}
           </CardContent>
         </Card>

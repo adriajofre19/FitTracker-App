@@ -15,43 +15,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         where: { email: email },
     });
 
+    console.log(user?.id);
 
-    try {
 
-        const routine = await prisma.routine.create({
+
+
+    const routine = await prisma.routine.create({
+        data: {
+            name,
+            description,
+            userId: user?.id,
+        },
+    });
+
+
+
+
+    for (let i = 0; i < exercises.length; i++) {
+        console.log(exercises[i]);
+        await prisma.exercise.create({
             data: {
-                name,
-                description,
-                userId: user ? user.id : '',
-                
+                routineId: routine.id,
+                exerciseId: exercises[i],
             },
         });
 
-
-
-        const id = routine.id;
-        console.log(id);
-
-        for (let i = 0; i < exercises.length; i++) {
-            console.log(exercises[i]);
-            await prisma.exercise.create({
-                data: {
-                    routineId: id,
-                    exerciseId: exercises[i],
-                },
-            });
-            
-        }
-
-        
-
-
-        
-
-        return res.status(200).json(routine);
-    
-
-    } catch (error) {
-        return res.status(500).json({ message: 'Internal server error', error });
     }
+
+
+
+
+
+
+    return res.status(200).json(routine);
+
 }

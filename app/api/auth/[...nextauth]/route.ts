@@ -42,7 +42,7 @@ export const authOptions = {
 
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       // Redirige a la página principal después de iniciar sesión
-      return baseUrl + "/exercises";
+      return baseUrl + "/workouts";
     },
 
     async session({ session, token }: { session: any; token: any }) {

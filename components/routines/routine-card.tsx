@@ -36,8 +36,8 @@ interface RoutineCardProps {
 }
 
 export function RoutineCard({ routine, onEdit, onDelete, onToggleComplete }: RoutineCardProps) {
-  
-    return (
+
+  return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="space-y-1">
@@ -59,12 +59,12 @@ export function RoutineCard({ routine, onEdit, onDelete, onToggleComplete }: Rou
             <DropdownMenuItem onClick={() => onEdit?.(routine.id)}>
               Edit routine
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               onClick={() => onToggleComplete?.(routine.id)}
             >
               Mark as {routine.completed ? 'incomplete' : 'complete'}
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               className="text-destructive"
               onClick={() => onDelete?.(routine.id)}
             >
@@ -92,7 +92,7 @@ export function RoutineCard({ routine, onEdit, onDelete, onToggleComplete }: Rou
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between pt-2">
-        <Badge 
+        <Badge
           variant={routine.completed ? "default" : "secondary"}
           className="flex items-center gap-1"
         >

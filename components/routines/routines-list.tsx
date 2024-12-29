@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react"
 
 import { RoutineCard } from "./routine-card"
-import { 
-  Pagination, 
-  PaginationContent, 
-  PaginationItem, 
-  PaginationLink, 
-  PaginationNext, 
-  PaginationPrevious 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
 } from "@/components/ui/pagination"
 
 export function RoutinesPage() {
@@ -26,6 +26,18 @@ export function RoutinesPage() {
   useEffect(() => {
     getRoutinesFromUser();
   }, [])
+
+  const deleteRoutine = async (id: string) => {
+    console.log(id);
+    await fetch('/api/workouts/delete/delete-workout', {
+      method: 'DELETE',
+      body: JSON.stringify({ id }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    getRoutinesFromUser();
+  }
 
   const totalPages = Math.ceil(routines.length / routinesPerPage);
   const currentRoutines = routines.slice((currentPage - 1) * routinesPerPage, currentPage * routinesPerPage);
@@ -47,7 +59,7 @@ export function RoutinesPage() {
             key={routine}
             routine={routine}
             onEdit={(id) => console.log("Edit", id)}
-            onDelete={(id) => console.log("Delete", id)}
+            onDelete={(id) => deleteRoutine(id)}
             onToggleComplete={(id) => console.log("Toggle", id)}
           />
         ))}
@@ -56,8 +68,8 @@ export function RoutinesPage() {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious 
-              href="#" 
+            <PaginationPrevious
+              href="#"
               onClick={(e) => {
                 e.preventDefault()
                 setCurrentPage((p) => Math.max(1, p - 1))
@@ -80,8 +92,8 @@ export function RoutinesPage() {
             </PaginationItem>
           ))}
           <PaginationItem>
-            <PaginationNext 
-              href="#" 
+            <PaginationNext
+              href="#"
               onClick={(e) => {
                 e.preventDefault()
                 setCurrentPage((p) => Math.min(totalPages, p + 1))
@@ -94,3 +106,4 @@ export function RoutinesPage() {
     </div>
   )
 }
+

@@ -4,11 +4,10 @@ import { useState } from "react";
 import { WorkoutsNav } from "@/components/workouts/workouts-nav";
 import { WorkoutsCalendar } from "@/components/workouts/workouts-calendar";
 import { ComingSoon } from "@/components/workouts/coming-soon";
-import { ExercisesList } from "@/components/workouts/exercises/exercises-list";
-import {RoutinesPage} from "@/components/routines/routines-list";
+import { RoutinesPage } from "@/components/routines/routines-list";
 import { CreateRoutinePage } from "@/components/routines/create/create-routines";
 
-type TabType = "calendar" | "routines" | "addroutines" | "exercises" | "progress";
+type TabType = "calendar" | "routines" | "addroutines" | "progress";
 
 export default function WorkoutsPage() {
   const [activeTab, setActiveTab] = useState<TabType>("calendar");
@@ -21,7 +20,6 @@ export default function WorkoutsPage() {
           {activeTab === "calendar" && <WorkoutsCalendar />}
           {activeTab === "routines" && <RoutinesPage />}
           {activeTab === "addroutines" && <CreateRoutinePage />}
-          {activeTab === "exercises" && <ExercisesList />}
           {activeTab === "progress" && <ComingSoon title="Progress Tracking" />}
         </div>
       </div>

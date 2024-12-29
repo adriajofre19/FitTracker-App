@@ -13,10 +13,13 @@ interface Routine {
 
 interface WorkoutListProps {
   routines: Routine[];
+  date: Date;
 }
 
-export function WorkoutList({ routines }: WorkoutListProps) {
+export function WorkoutList({ routines, date }: WorkoutListProps) {
   const router = useRouter();
+
+  const dateSmallString = date.toDateString().slice(4);
 
   if (!routines?.length) {
     return (
@@ -32,7 +35,7 @@ export function WorkoutList({ routines }: WorkoutListProps) {
         <div
           key={routine.id}
           className="border rounded-lg p-4 hover:bg-muted/50 transition-colors cursor-pointer"
-          onClick={() => router.push(`/workouts/routine/${routine.id}`)}
+          onClick={() => router.push(`/workouts/${dateSmallString}/routine/${routine.id}`)}
         >
           <div className="flex justify-between items-start mb-2">
             <h3 className="font-semibold">{routine.name}</h3>

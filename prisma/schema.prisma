@@ -14,25 +14,25 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  name      String?
-  age       Int?
-  weight    Float?
-  height    Float?
-  avatar    String?
-  externalId String?
-  password  String
-  createdAt DateTime  @default(now()) @map("created_at")
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  name        String?
+  age         Int?
+  weight      Float?
+  height      Float?
+  avatar      String?
+  externalId  String?
+  password    String
+  createdAt   DateTime      @default(now()) @map("created_at")
   UserRoutine UserRoutine[]
 
   @@map("users")
 }
 
 model UserRoutine {
-  id        String    @id @default(uuid())
-  userId    String    @map("user_id")
-  routineId String    @map("routine_id")
+  id        Int       @id @default(autoincrement())
+  userId    Int       @map("user_id")
+  routineId Int       @map("routine_id")
   date      DateTime?
   completed Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
@@ -43,23 +43,23 @@ model UserRoutine {
 }
 
 model Routine {
-  id          String    @id @default(uuid())
+  id          Int           @id @default(autoincrement())
   name        String
   description String?
-  userId      String    @map("user_id")
+  userId      Int           @map("user_id")
   UserRoutine UserRoutine[]
   exercises   Exercise[]
-  createdAt   DateTime  @default(now()) @map("created_at")
+  createdAt   DateTime      @default(now()) @map("created_at")
 
   @@map("routines")
 }
 
 model Exercise {
-  id          String    @id @default(uuid())
-  exerciseId  String
-  routineId   String    @map("routine_id")
-  routine     Routine   @relation(fields: [routineId], references: [id])
-  createdAt   DateTime  @default(now()) @map("created_at")
+  id         String   @id @default(uuid())
+  exerciseId String
+  routineId  Int      @map("routine_id")
+  routine    Routine  @relation(fields: [routineId], references: [id])
+  createdAt  DateTime @default(now()) @map("created_at")
 
   @@map("exercises")
 }
